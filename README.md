@@ -4,15 +4,17 @@
 
 # SPaiNN - Equivariant Message Passing for Excited-State Nonadiabatic Molecular Dynamics
 ## An Interface between SchNetPack and SHARC for performing Machine Learning-accelerated Photodynamics Simulations
-
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
-![version](https://img.shields.io/badge/version-1.0.0-blue)
+__________________________
 
 # SPaiNN
 
 SPaiNN is a Python package that provides a flexible and efficient interface to the [SchNetPack 2.0](https://github.com/atomistic-machine-learning/schnetpack/tree/master)<sup>1</sup> package a toolbox for the development and application of deep neural networks to the prediction of potential energy surfaces and other quantum-chemical properties of molecules and materials.
 SPaiNN allows users to predict energies, forces, dipoles, and non-adiabatic couplings for multiple electronic states, and additionally provides an interface to the [SHARC](https://www.sharc-md.org/)<sup>2</sup> (Surface Hopping including Arbitrary Couplings) software for running excited-state dynamics simulations.
 SPaiNN is an extension to the [SchNarc](https://github.com/schnarc/SchNarc)<sup>3</sup> software, *i.e.*, a python software that combines [SchNetPack 1.0](https://github.com/atomistic-machine-learning/schnetpack/tree/schnetpack1.0)<sup>4-7</sup> and [SHARC](https://www.sharc-md.org/)<sup>2</sup>.
+
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+![version](https://img.shields.io/badge/version-1.0.0-blue)
 
 ## Features
 
