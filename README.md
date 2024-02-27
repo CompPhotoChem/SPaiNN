@@ -2,7 +2,7 @@
   <img src="docs/_static/spainn.svg">
 </p>
 
-# SPaiNN - Exited State Dynamics with Machine Learning
+# SPaiNN - An Interface between SchNetPack and SHARC for performing Machine Learning-accelerated Photodynamics Simulations
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 ![version](https://img.shields.io/badge/version-1.0.0-blue)
