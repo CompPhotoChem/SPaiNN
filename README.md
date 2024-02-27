@@ -35,6 +35,39 @@ SPaiNN is an extension to the [SchNarc](https://github.com/schnarc/SchNarc)<sup>
 [How to setup data for SPaiNN](docs/database.md)  
 ... under construction
 
+## Usage
+
+For a quick start, see the [tutorials](https://github.com/CompPhotoChem/SPaiNN/tree/main/tutorials) directory, which contains Jupyter Notebooks showing the workflow for predicting PES for multiple electronic states or NACs as vectorial property.
+You can also consult the [documentation]( ) for detailed information about the workflows, API and general usage of SPaiNN.
+
+```bash
+src/
+├── spainn/
+│   ├── __init__.py
+│   ├── plotting.py
+│   ├── atomistic/
+│   │   ├── __init__.py
+│   │   ├── phase.py
+│   │   └── response.py
+│   ├── processing/
+│   │   ├── __init__.py
+│   │   ├── multistate.py
+│   │   └── statistics.py
+│   └── configs/
+│       ├── train.yaml
+│       └── predict.yaml
+└── scripts/
+    ├── train_spainn.py
+    └── eval_spainn.py
+examples/
+├── NNpot_butene.ipynb
+├── NACs_butene.ipynb
+└── data/
+    ├── 3Sing_butene.db
+    ├── 2Sing_butene.db
+    └── 1Sing_butene.db
+```
+
 ## Installation
 
 ### SPaiNN
@@ -72,39 +105,6 @@ read(nunit,'(A)', iostat=stat) line
 Then open ``pysharc/sharc/__init__.py``  there and make the following changes:  
 ```python
 #import sharc as sharc
-```
-
-## Usage
-
-For a quick start, see the [tutorials](https://github.com/CompPhotoChem/SPaiNN/tree/main/tutorials) directory, which contains Jupyter Notebooks showing the workflow for predicting PES for multiple electronic states or NACs as vectorial property.
-You can also consult the [documentation]( ) for detailed information about the workflows, API and general usage of SPaiNN.
-
-```bash
-src/
-├── spainn/
-│   ├── __init__.py
-│   ├── plotting.py
-│   ├── atomistic/
-│   │   ├── __init__.py
-│   │   ├── phase.py
-│   │   └── response.py
-│   ├── processing/
-│   │   ├── __init__.py
-│   │   ├── multistate.py
-│   │   └── statistics.py
-│   └── configs/
-│       ├── train.yaml
-│       └── predict.yaml
-└── scripts/
-    ├── train_spainn.py
-    └── eval_spainn.py
-examples/
-├── NNpot_butene.ipynb
-├── NACs_butene.ipynb
-└── data/
-    ├── 3Sing_butene.db
-    ├── 2Sing_butene.db
-    └── 1Sing_butene.db
 ```
 
 ## Contributing
