@@ -10,8 +10,8 @@
 # SPaiNN
 
 SPaiNN is a Python package that provides a flexible and efficient interface to the [SchNetPack 2.0](https://github.com/atomistic-machine-learning/schnetpack/tree/master) package a toolbox for the development and application of deep neural networks to the prediction of potential energy surfaces and other quantum-chemical properties of molecules and materials.
-spaiNN allows users to predict energies, forces, dipoles, and non-adiabatic couplings for multiple electronic states, and additionally provides an interface to the [SHARC](https://www.sharc-md.org/) (Surface Hopping including Arbitrary Couplings) software for running excited-state dynamics simulations.
-spaiNN is an extension to the [SchNarc](https://github.com/schnarc/SchNarc)<sup>1</sup> software, *i.e.*, a python software that combines [SchNetPack 1.0](https://github.com/atomistic-machine-learning/schnetpack/tree/schnetpack1.0)<sup>2-4</sup> and [SHARC](https://www.sharc-md.org/).
+spaiNN allows users to predict energies, forces, dipoles, and non-adiabatic couplings for multiple electronic states, and additionally provides an interface to the [SHARC<sup>1</sup>](https://www.sharc-md.org/) (Surface Hopping including Arbitrary Couplings) software for running excited-state dynamics simulations.
+spaiNN is an extension to the [SchNarc](https://github.com/schnarc/SchNarc)<sup>2</sup> software, *i.e.*, a python software that combines [SchNetPack 1.0<sup>3</sup>](https://github.com/atomistic-machine-learning/schnetpack/tree/schnetpack1.0)<sup>2-4</sup> and [SHARC<sup>1</sup>](https://www.sharc-md.org/).
 
 ## Features
 
@@ -30,6 +30,10 @@ spaiNN is an extension to the [SchNarc](https://github.com/schnarc/SchNarc)<sup>
 - PyTorch Lightning 1.9.0
 - Hydra 1.1
 - [SHARC 2.1](https://www.sharc-md.org/)
+
+## Documentation
+[How to setup data for SPaiNN](docs/database.md)  
+... under construction
 
 ## Installation
 
@@ -105,33 +109,17 @@ examples/
 
 ## Contributing
 
-Contributions to spaiNN are welcome! Please refer to the [contributing guidelines](https://github.com/carolin-m/spaiNN/blob/main/CONTRIBUTING.md) for more information.
+Contributions to spaiNN are welcome! Please refer to the [contributing guidelines](https://github.com/CompPhotoChem/SPaiNN/blob/main/Contributing.md) for more information.
 
 ## License
 
-spaiNN is released under the [MIT License](https://github.com/carolin-m/spaiNN/blob/main/LICENSE).
+spaiNN is released under the [MIT License](https://github.com/CompPhotoChem/SPaiNN/blob/main/LICENSE).
 
 ## References
-- [1] J. Westermayr, M. Gastegger, P. Marquetand, *Phys. Chem. Lett.* **2020**, 11, 10, 3828–3834, [10.1021/acs.jpclett.0c00527](https://doi.org/10.1021/acs.jpclett.0c00527)
-- [2] K.T. Schütt. F. Arbabzadah. S. Chmiela, K.-R. Müller, A. Tkatchenko, *Nat. Comm.* **2017**, 8, 13890, [10.1038/ncomms13890](https://www.nature.com/articles/ncomms13890)
-- [3] K.T. Schütt. P.-J. Kindermans, H. E. Sauceda, S. Chmiela, A. Tkatchenko, K.-R. Müller, *Advances in Neural Information Processing Systems* **2017**, 30, 992-1002, [Paper](https://proceedings.neurips.cc/paper/2017/hash/303ed4c69846ab36c2904d3ba8573050-Abstract.html)
-- [4] K.T. Schütt. P.-J. Kindermans, H. E. Sauceda, S. Chmiela, A. Tkatchenko, K.-R. Müller, *J. Chem. Phys.* **2018**, 148, 24, 241722, [10.1063/1.5019779](https://aip.scitation.org/doi/10.1063/1.5019779)
-- [5] K. T. Schütt, O. T. Unke, M. Gastegger, *Proceedings of the 38th International Conference on Machine Learning* **2021**, PMLR 139:9377-9388, [Paper](https://proceedings.mlr.press/v139/schutt21a.html)
-
-
-
-
-## Documentation
-[How to setup data for SPaiNN](docs/database.md)  
-... under construction
-
-## References
-
-
-* [1] K.T. Schütt, P. Kessel, M. Gastegger, K. Nicoli, A. Tkatchenko, K.-R. Müller.  
-*SchNetPack: A Deep Learning Toolbox For Atomistic Systems.*  
-J. Chem. Theory Comput. [10.1021/acs.jctc.8b00908](http://dx.doi.org/10.1021/acs.jctc.8b00908) [arXiv:1809.01072](https://arxiv.org/abs/1809.01072). (2018)
-
-* [3] S. Mai, M. Richter, M. Heindl, M. F. S. J. Menger, A. Atkins, M. Ruckenbauer, F. Plasser, L.M. Ibele, S. Kropf, M. Oppel, P. Marquetand, L. González.  
-*SHARC2.1: Surface Hopping Including Arbitrary Couplings – Program Package for Non-Adiabatic Dynamics (2019).*  
-[SHARC 2.1](https://sharc-md.org)
+- [1] S. Mai, M. Richter, M. Heindl, M. F. S. J. Menger, A. Atkins, M. Ruckenbauer, F. Plasser, L.M. Ibele, S. Kropf, M. Oppel, P. Marquetand, L. González, *SHARC2.1: Surface Hopping Including Arbitrary Couplings – Program Package for Non-Adiabatic Dynamics* **2019**, [SHARC 2.1](https://sharc-md.org)
+- [2] J. Westermayr, M. Gastegger, P. Marquetand, *Phys. Chem. Lett.* **2020**, 11, 10, 3828–3834, [10.1021/acs.jpclett.0c00527](https://doi.org/10.1021/acs.jpclett.0c00527)
+- [3] K.T. Schütt, P. Kessel, M. Gastegger, K. Nicoli, A. Tkatchenko, K.-R. Müller, *J. Chem. Theory Comput.* **2019**, 15, 1, 448–455, [10.1021/acs.jctc.8b00908](http://dx.doi.org/10.1021/acs.jctc.8b00908)
+- [4] K.T. Schütt. F. Arbabzadah. S. Chmiela, K.-R. Müller, A. Tkatchenko, *Nat. Comm.* **2017**, 8, 13890, [10.1038/ncomms13890](https://www.nature.com/articles/ncomms13890)
+- [5] K.T. Schütt. P.-J. Kindermans, H. E. Sauceda, S. Chmiela, A. Tkatchenko, K.-R. Müller, *Advances in Neural Information Processing Systems* **2017**, 30, 992-1002, [Paper](https://proceedings.neurips.cc/paper/2017/hash/303ed4c69846ab36c2904d3ba8573050-Abstract.html)
+- [6] K.T. Schütt. P.-J. Kindermans, H. E. Sauceda, S. Chmiela, A. Tkatchenko, K.-R. Müller, *J. Chem. Phys.* **2018**, 148, 24, 241722, [10.1063/1.5019779](https://aip.scitation.org/doi/10.1063/1.5019779)
+- [7] K. T. Schütt, O. T. Unke, M. Gastegger, *Proceedings of the 38th International Conference on Machine Learning* **2021**, PMLR 139:9377-9388, [Paper](https://proceedings.mlr.press/v139/schutt21a.html)
