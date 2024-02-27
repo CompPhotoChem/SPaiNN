@@ -15,7 +15,7 @@ SPaiNN is an extension to the [SchNarc](https://github.com/schnarc/SchNarc)<sup>
 
 ## Features
 
-- Predict potential energy surfaces of multiple electronic states (SchNet<sup>4-7</sup>)
+- Predict potential energy surfaces of multiple electronic states (SchNet<sup>4-7</sup>, PaiNN<sup>8</sup>)
 - Predict vector-properties of multiple electronic states, such as non-adiabatic couplings or dipole moments (SchNet<sup>4-7</sup>, PaiNN<sup>8</sup>)
 - Interface to the [SHARC](https://www.sharc-md.org/)<sup>2</sup> software for running excited state dynamics simulations
 - Flexible implementation in Python
