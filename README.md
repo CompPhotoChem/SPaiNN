@@ -47,28 +47,38 @@ You can also consult the [documentation]( ) for detailed information about the w
 src/
 ├── spainn/
 │   ├── __init__.py
+│   ├── calculator.py
+│   ├── cli.py
+│   ├── loss.py
+│   ├── metric.py
+│   ├── model.py
+│   ├── multidatamodule.py
 │   ├── plotting.py
-│   ├── atomistic/
+│   ├── properties.py
+│   ├── asetools/
 │   │   ├── __init__.py
-│   │   ├── phase.py
-│   │   └── response.py
-│   ├── processing/
-│   │   ├── __init__.py
-│   │   ├── multistate.py
-│   │   └── statistics.py
-│   └── configs/
-│       ├── train.yaml
-│       └── predict.yaml
+│   │   ├── aseutils.py
+│   │   ├── convert_db.py
+│   │   └── generate_db.py
+│   ├── configs/
+│       ├── __init__.py
+│       └── train.yaml
+│   └── interface/
+│       ├── __init__.py
+│       ├── aseinterface.py
+│       └── sharcinterface.py
 └── scripts/
-    ├── train_spainn.py
-    └── eval_spainn.py
-examples/
-├── NNpot_butene.ipynb
-├── NACs_butene.ipynb
+    ├── aselen
+    ├── spainn-db
+    └── spainn-train
+tutorials/
+├── tut_01_preparing_data.ipynb
+├── tut_02_MLFF.ipynb
+├── tut_03_MLFF_phase_prop.ipynb
+├── tut_04_predictions.ipynbNNpot_butene.ipynb
 └── data/
-    ├── 3Sing_butene.db
-    ├── 2Sing_butene.db
-    └── 1Sing_butene.db
+    ├── schnarc_ch2nh2+.db
+    └── spainn_ch2nh2+.db
 ```
 
 ## Installation
