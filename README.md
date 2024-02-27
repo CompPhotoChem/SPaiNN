@@ -61,8 +61,8 @@ src/
 │   │   ├── convert_db.py
 │   │   └── generate_db.py
 │   ├── configs/
-│       ├── __init__.py
-│       └── train.yaml
+│   |   ├── __init__.py
+│   |   └── train.yaml
 │   └── interface/
 │       ├── __init__.py
 │       ├── aseinterface.py
