@@ -155,7 +155,8 @@ class PlotMAE:
         props = [at.get_properties(propname) for at in atoms]
 
         pred = {
-            key: np.stack((val[key] for val in props)).squeeze() for key in props[0]
+            #key: np.stack((val[key] for val in props)).squeeze() for key in props[0]
+            key: np.stack([val[key] for val in props]) for key in props[0]
         }
 
         ref = {}
