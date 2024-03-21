@@ -305,6 +305,12 @@ class PhysPhaseLossAtomistic(nn.Module):
         return phasevector
 
     def forward(self, output, target):
+        
+        # make sure output and target are both on CUDA, if enabled:
+        if torch.cuda.is_available():
+            cuda = torch.device('cuda')
+            output = output.to(cuda)
+            target = target.to(cuda)
 
         # get number of couplings (e.g. NACs from shape of data)
         _, n_nacs, _ = output.shape
