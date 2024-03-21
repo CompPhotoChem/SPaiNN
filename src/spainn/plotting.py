@@ -164,10 +164,10 @@ class PlotMAE:
         mse = {}
         for prop in propname:
             ref[prop] = np.stack(
-                (
+                [
                     struc[prop if prop != "smooth_nacs" else "nacs"].numpy()
                     for struc in structure
-                )
+                ]
             ).squeeze()
 
             if prop in ['smooth_nacs', 'nacs', 'dipoles']:
