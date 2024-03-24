@@ -253,7 +253,8 @@ class PhysPhaseLossAtomistic(nn.Module):
         self.n_states = n_states
         self.n_couplings = int(0.5*n_states*(n_states-1)) if not n_couplings else n_couplings
         self.n_phases = int(2**(n_states-1)) if not n_phases else n_phases
-
+    
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.phasemat = self._get_phasematrix(
                 n_states=self.n_states, 
                 n_phases=self.n_phases, 
@@ -300,17 +301,11 @@ class PhysPhaseLossAtomistic(nn.Module):
         assert len(vec_icond) == n_phases, f"Found {len(vec_icond)} permutations, but expects {n_phases} phases."
 
         # reshape list of vectors to array, transpose it and make a torch tensor
-        phasevector = torch.Tensor(np.transpose(np.array(vec_icond)))
+        phasevector = torch.as_tensor(np.transpose(np.array(vec_icond)), device=self.device)
 
         return phasevector
 
     def forward(self, output, target):
-        
-        # make sure output and target are both on CUDA, if enabled:
-        if torch.cuda.is_available():
-            cuda = torch.device('cuda')
-            output = output.to(cuda)
-            target = target.to(cuda)
 
         # get number of couplings (e.g. NACs from shape of data)
         _, n_nacs, _ = output.shape
@@ -321,7 +316,7 @@ class PhysPhaseLossAtomistic(nn.Module):
         # correct predictions by element-wise multiplication with phasematrix
         output_phasecorr = torch.einsum('ijk,jl->jilk', output, self.phasemat)
         # bring targets in same shape as phase-corrected predictions (copy n_phases times)
-        target_phase = torch.einsum('ijk,jl->jilk', target, torch.ones(self.phasemat.shape))
+        target_phase = torch.einsum('ijk,jl->jilk', target, torch.ones(self.phasemat.shape, device=self.device))
 
         # calculate loss between phasecorrected predictions and targets 
         criterion = self.criterion

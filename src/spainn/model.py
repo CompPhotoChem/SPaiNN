@@ -203,7 +203,7 @@ class Nacs(nn.Module):
             # Multiply scalar part with positions and add vector part
             # Seems to be the best way to include the scalar part and improve predictions
             nacs_painn = torch.einsum('ij,ik->ijk', inputs[properties.R], nacss) + nacsv
-            inputs[self.nac_key] = torch.transpose(nacs_painn, 2, 1)
+            inputs[self.nac_key] = torch.transpose(nacs_painn, 2, 1).contiguous()
 
         else:
             virt = self.outnet(l0)
