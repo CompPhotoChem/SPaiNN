@@ -237,6 +237,11 @@ class PhysPhaseLossAtomistic(nn.Module):
     The PhasePropLoss class is a custom loss function used to calculate the
     loss of properties with arbitrary phase. It implements a mean square 
     error (MSE) calculation.
+
+    Loss function is re-implemented from SchNarc [1]
+
+    [1] J. Westermayr, M. Gastegger, and P. Marquetand, J. Phys. Chem. Lett. 2020, 
+        11 (10), 3828-3834, 10.1021/acs.jpclett.0c00527 
     """
 
     def __init__(self, 
