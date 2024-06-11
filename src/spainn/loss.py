@@ -11,6 +11,7 @@ import torch.nn.functional as F
 __all__ = [
     "MeanVectorLoss",
     "PhaseException",
+    "PhaseLossAtomistic",
     "PhaseLossAtomisticMAE",
     "PhaseLossAtomisticMSE",
     "PhaseLoss",
@@ -47,6 +48,55 @@ class MeanVectorLoss(nn.Module):
 
 class PhaseException(Exception):
     pass
+
+class PhaseLossAtomistic(nn.Module):
+    """
+    A custom loss function for phase loss.
+    The loss of each element multiplied by 1 or -1 is taken,
+    the lowest value gets returned.
+    Basicly a lossless MAE and MSE implementation
+    """
+
+    def __init__(self, atoms: int = None, mse=True):
+        super().__init__()
+        self.atoms = atoms
+        self.mse = mse
+
+    def forward(self, inputs, targets) -> torch.Tensor:
+        # calculate MAE
+        target_states = torch.reshape(
+            targets,
+            (
+                -1,
+                self.atoms,
+                targets.shape[1],
+                targets.shape[2],
+            ),
+        )
+        input_states = torch.reshape(
+            inputs,
+            (
+                -1,
+                self.atoms,
+                inputs.shape[1],
+                inputs.shape[2],
+            ),
+        )
+
+        if self.mse:
+            positive = torch.sum(torch.square(target_states + input_states), dim=(1, 3))
+            negative = torch.sum(torch.square(target_states - input_states), dim=(1, 3))
+        else:
+            positive = torch.sum(torch.abs(target_states + input_states), dim=(1, 3))
+            negative = torch.sum(torch.abs(target_states - input_states), dim=(1, 3))
+
+        result = torch.min(positive, negative)
+        return torch.sum(result) / targets.numel()
+
+    def clone(self) -> "Loss":
+        # Make a copy of the loss.
+        return deepcopy(self)
+
 
 class PhaseLossAtomisticMAE(nn.Module):
     """
