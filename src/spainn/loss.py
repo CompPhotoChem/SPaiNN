@@ -13,6 +13,7 @@ __all__ = [
     "PhaseException",
     "PhaseLossAtomisticMAE",
     "PhaseLossAtomisticMSE",
+    "PhaseLoss",
     "PhaseLossMAE",
     "PhaseLossMSE",
     "PhysPhaseLossAtomistic",
@@ -125,6 +126,74 @@ class PhaseLossAtomisticMSE(nn.Module):
 
         positive = torch.sum(torch.square(target_states + input_states), dim=(1, 3))
         negative = torch.sum(torch.square(target_states - input_states), dim=(1, 3))
+
+        result = torch.min(positive, negative)
+        return torch.sum(result) / targets.numel()
+
+    def clone(self) -> "Loss":
+        """Make a copy of the loss."""
+        return deepcopy(self)
+
+class PhaseLoss(nn.Module):
+    """
+    The PhaseLoss class is a custom loss function for bulk properties
+    that emerge when two distinct electronic states are coupled. 
+    It is intended for non-atomistic properties, such as dipoles,
+    that have a shape of `(batch_size*n_dipoles, 3)`.
+
+    One example are transition dipoles, which are influenced by the dipole 
+    operator :math:`\hat{\mu}` and read as
+
+    .. math::
+
+        \\mu_{ij}(\\mathbf{R}) = \\left\\langle\\Psi_i(\\mathbf{R})|\\hat{\\mu}|\\Psi_j(\\mathbf{R})\\right\\rangle
+
+
+    As the coupled wavefunctions :math:`\Psi_i` and :math:`\Psi_j` have 
+    arbitrary signs, also the resulting property possesses an arbitrary sign.
+    The main feature of the customized loss function is that calculates a 
+    phase-independent loss. 
+    It implements a Mean Square Error (MSE) calculation (default) or Mean Average Error 
+    calculation (mse=False). The loss of each element multiplied by 1 or -1 is taken,
+    the lowest value gets returned.
+
+    During calculation, the reference data and predictions (targets and
+    inputs) are subtracted and added, respectively and all values are
+    squared (MSE) or not-squared (MA). The absolute values of these two tensors 
+    are computed and summed over the xyz-axis, resulting in two separate tensors:
+    a positive tensor and a negative tensor. The minimum value between
+    the positive and negative tensors is then computed, and the values
+    are summed over all axes and divided by the total number of elements
+    in the target.
+
+    The forward() method takes inputs and targets as arguments and re-
+    turns a float, i.e., MSE or MAE loss value (L) as the result.
+
+    For dipoles of shape (:math:`N = [1, N_D, 3]`), the PhaseLoss
+    is defined as
+
+    .. math::
+
+        \\mathcal{L} = \\frac{1}{3N} \\sum_k^{N_D}\\min_i\\left(\\sum_l^3 | D_k^{ref}1_2^{\\top}
+        - D_k^{pred}1_2^{\\top}\\odot \\begin{pmatrix} 1 \\\\ -1 \\end{pmatrix}^{\\top} |_{l}^2\\right)
+
+    """
+
+    def __init__(self, 
+                 mse: Optional[str] = True,
+            ):
+
+        super().__init__()
+        self._mse = mse 
+
+    def forward(self, inputs, targets) -> torch.Tensor:
+
+        if self._mse:
+            positive = torch.sum(torch.square(targets + inputs), dim=1)
+            negative = torch.sum(torch.square(targets - inputs), dim=1)
+        else:
+            positive = torch.sum(torch.abs(targets + inputs), dim=1)
+            negative = torch.sum(torch.abs(targets - inputs), dim=1)
 
         result = torch.min(positive, negative)
         return torch.sum(result) / targets.numel()
