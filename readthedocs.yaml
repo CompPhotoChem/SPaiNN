@@ -6,9 +6,6 @@ build:
 sphinx:
     configuration: docs/conf.py
 
-version: 1
-mkdocs: {}
-
 python:
     version: 3.8
     install:
