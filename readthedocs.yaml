@@ -4,8 +4,6 @@ build:
     os: ubuntu-22.04
     tools:
         python: "3.9"
-    clone:
-        depth: 50
     default-branch: main
 
 sphinx:
