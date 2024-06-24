@@ -11,7 +11,7 @@
 
 # Documentation
 
-[Read The Docs of SPaiNN](https://spainn-md.readthedocs.io/en/latest/)
+[📑 Read The Docs of SPaiNN](https://spainn-md.readthedocs.io/en/latest/)
 
 __________________________
 
