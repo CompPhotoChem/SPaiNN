@@ -39,10 +39,6 @@ SPaiNN is an extension to the [SchNarc](https://github.com/schnarc/SchNarc)<sup>
 - Hydra 1.1
 - [SHARC 2.1](https://www.sharc-md.org/)
 
-## Documentation
-[How to setup data for SPaiNN](docs/database.md)  
-... under construction
-
 ## Usage
 
 For a quick start, see the [tutorials](https://github.com/CompPhotoChem/SPaiNN/tree/main/tutorials) directory, which contains Jupyter Notebooks showing the workflow for predicting PES for multiple electronic states or NACs as vectorial property.
