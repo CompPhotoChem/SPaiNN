@@ -9,6 +9,10 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 ![version](https://img.shields.io/badge/version-1.0.0-blue)
 
+# Documentation
+
+[Read The Docs of SPaiNN](https://spainn-md.readthedocs.io/en/latest/)
+
 __________________________
 
 # SPaiNN
