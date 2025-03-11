@@ -275,6 +275,7 @@ class GenerateDB(DatabaseUtils):
                 metadata["_property_unit_dict"][key] = val
         if smooth_nacs:
             metadata["_property_unit_dict"]["smooth_nacs"] = "1"
+        metadata["atomrefs"] = {}
         metadata.update(self.n_states)
         return metadata
 
