@@ -230,7 +230,7 @@ class GenerateDB(DatabaseUtils):
                     )
                 qm_out[SPAINN.forces] = -forces
 
-            elif key == SPAINN.dipoles:
+            elif key == SPAINN.dipoles and len(val) != 0:
                 n_dipoles = int(val[0][0].split()[0])
                 val = [x[0].split()[::2] for x in val]
                 dipoles = [
@@ -242,7 +242,7 @@ class GenerateDB(DatabaseUtils):
                 d_idx = np.triu_indices(n_dipoles, 0)
                 qm_out[SPAINN.dipoles] = np.einsum("ijk->jki", dipoles.squeeze())[d_idx]
 
-            elif key == SPAINN.nacs:
+            elif key == SPAINN.nacs and len(val) != 0:
                 natoms = int(val[0][0].split()[0])
                 states = int(np.sqrt(len(list(filter(lambda x: (len(x) != 1), val)))))
                 elements = len(val) // (1 + natoms)
