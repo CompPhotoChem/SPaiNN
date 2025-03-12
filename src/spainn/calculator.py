@@ -217,42 +217,43 @@ class SPaiNNulator:
         # Reshape force array from [atoms, states, coords] to [states, atoms, coords]
         qm_out["grad"] = np.einsum("ijk->jik", -spainn_output["forces"]).tolist()
 
-        nacs_v = np.einsum("ijk->jik", spainn_output[self.nac_key])
-        nacs_m = np.zeros((states, states, self.n_atoms, 3))
+        if self.nac_key in self.properties:
+            nacs_v = np.einsum("ijk->jik", spainn_output[self.nac_key])
+            nacs_m = np.zeros((states, states, self.n_atoms, 3))
 
-        if n_triplets == 0:
-            nacs_m[self.nac_idx] = nacs_v
-            nacs_m -= np.transpose(nacs_m, axes=(1, 0, 2, 3))
-        else:
-            nacs_singlet = np.zeros((n_singlets, n_singlets, self.n_atoms, 3))
-            nacs_singlet[self.nac_idx] = nacs_v[
-                0 : int(n_singlets * (n_singlets - 1) / 2)
-            ]
-            nacs_singlet -= nacs_singlet.T
+            if n_triplets == 0:
+                nacs_m[self.nac_idx] = nacs_v
+                nacs_m -= np.transpose(nacs_m, axes=(1, 0, 2, 3))
+            else:
+                nacs_singlet = np.zeros((n_singlets, n_singlets, self.n_atoms, 3))
+                nacs_singlet[self.nac_idx] = nacs_v[
+                    0 : int(n_singlets * (n_singlets - 1) / 2)
+                ]
+                nacs_singlet -= nacs_singlet.T
 
-            nacs_m[0:n_singlets, 0:n_singlets] = nacs_singlet
+                nacs_m[0:n_singlets, 0:n_singlets] = nacs_singlet
 
-            nacs_trip_sub = np.zeros((n_triplets, n_triplets, self.n_atoms, 3))
-            sub_idx = np.triu_indices(n_triplets, 1)
-            nacs_trip_sub[sub_idx] = nacs_v[int(n_singlets * (n_singlets - 1) / 2) :]
-            nacs_trip_sub -= nacs_trip_sub.T
+                nacs_trip_sub = np.zeros((n_triplets, n_triplets, self.n_atoms, 3))
+                sub_idx = np.triu_indices(n_triplets, 1)
+                nacs_trip_sub[sub_idx] = nacs_v[int(n_singlets * (n_singlets - 1) / 2) :]
+                nacs_trip_sub -= nacs_trip_sub.T
 
-            nacs_trip = np.zeros((3 * n_triplets, 3 * n_triplets, self.n_atoms, 3))
+                nacs_trip = np.zeros((3 * n_triplets, 3 * n_triplets, self.n_atoms, 3))
 
-            for i in range(3):
-                for j in range(i, 3):
-                    nacs_trip[
-                        i * n_triplets : (i + 1) * n_triplets,
-                        j * n_triplets : (j + 1) * n_triplets,
-                    ] = nacs_trip_sub
+                for i in range(3):
+                    for j in range(i, 3):
+                        nacs_trip[
+                            i * n_triplets : (i + 1) * n_triplets,
+                            j * n_triplets : (j + 1) * n_triplets,
+                        ] = nacs_trip_sub
 
-            trip_idx = np.tril_indices(3 * n_triplets)
-            nacs_trip[trip_idx] = 0
-            nacs_trip -= nacs_trip.T
+                trip_idx = np.tril_indices(3 * n_triplets)
+                nacs_trip[trip_idx] = 0
+                nacs_trip -= nacs_trip.T
 
-            nacs_m[n_singlets:, n_singlets:] = nacs_trip
+                nacs_m[n_singlets:, n_singlets:] = nacs_trip
 
-        qm_out["nacdr"] = nacs_m.tolist()
+            qm_out["nacdr"] = nacs_m.tolist()
 
         if "dipoles" in self.properties:
             dm_m = np.zeros((states, states, 3), dtype=complex)
